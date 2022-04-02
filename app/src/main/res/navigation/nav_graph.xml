@@ -6,6 +6,6 @@
 
     <fragment
         android:id="@+id/authorizationFragment"
-        android:name="com.example.feature_authoriztion_screen.AuthorizationFragment"
+        android:name="com.example.feature_authoriztion_screen.presentation.fragment.AuthorizationFragment"
         android:label="AuthorizationFragment" />
 </navigation>
