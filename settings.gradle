@@ -9,3 +9,4 @@ dependencyResolutionManagement {
 rootProject.name = "Audita"
 include ':app'
 include ':feature-authoriztion-screen'
+include ':feature-profile-screen'
