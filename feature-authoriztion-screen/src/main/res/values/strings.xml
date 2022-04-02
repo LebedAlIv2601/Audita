@@ -1,4 +1,7 @@
 <resources>
-    <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
+
+    <string name="email_label_text">Почта</string>
+    <string name="nickname_label_text">Никнейм</string>
+    <string name="password_label_text">Пароль</string>
+    <string name="repeat_password_label_text">Подтвердите пароль</string>
 </resources>
