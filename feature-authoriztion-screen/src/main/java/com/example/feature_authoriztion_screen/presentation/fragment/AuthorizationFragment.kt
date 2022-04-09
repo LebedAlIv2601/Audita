@@ -24,4 +24,15 @@ class AuthorizationFragment : Fragment() {
 
         return binding?.root
     }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+
+        setupObservers()
+
+        super.onViewCreated(view, savedInstanceState)
+    }
+
+    private fun setupObservers() {
+
+    }
 }

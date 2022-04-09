@@ -33,9 +33,10 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/email_label_text"
+            android:layout_marginTop="16dp"
             android:textSize="16sp"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toBottomOf="@+id/nickname_edit_text" />
 
         <EditText
             android:id="@+id/email_edit_text"
@@ -50,10 +51,11 @@
             android:id="@+id/password_label_text_view"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/email_label_text"
+            android:text="@string/password_label_text"
+            android:layout_marginTop="16dp"
             android:textSize="16sp"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toBottomOf="@+id/email_edit_text" />
 
         <EditText
             android:id="@+id/password_edit_text"
@@ -68,10 +70,11 @@
             android:id="@+id/repeat_password_label_text_view"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/email_label_text"
+            android:text="@string/repeat_password_label_text"
+            android:layout_marginTop="16dp"
             android:textSize="16sp"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toBottomOf="@+id/password_edit_text" />
 
         <EditText
             android:id="@+id/repeat_password_edit_text"
