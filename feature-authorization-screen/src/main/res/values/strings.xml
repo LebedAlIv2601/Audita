@@ -4,4 +4,11 @@
     <string name="nickname_label_text">Никнейм</string>
     <string name="password_label_text">Пароль</string>
     <string name="repeat_password_label_text">Подтвердите пароль</string>
+    <string name="auth_button_text">Войти</string>
+    <string name="registr_button_text">Регистрация</string>
+    <string name="sign_in_button_text">Войти</string>
+    <string name="sign_up_button_text">Зарегистрироваться</string>
+
+    <string name="password_check_length_toast_text">Длина пароля должна составлять не меньше 8 символов</string>
+    <string name="password_check_repeat_toast_text">Пароли не совпадают</string>
 </resources>
