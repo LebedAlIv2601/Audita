@@ -7,6 +7,7 @@ import com.example.feature_authorization_screen.data.model.DataUserForAuth
 import com.example.feature_authorization_screen.utils.AuthorizationState
 import com.google.firebase.auth.FirebaseAuth
 import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.tasks.await
 import java.lang.Exception
 import javax.inject.Inject
 
@@ -14,16 +15,36 @@ class FirebaseAuthHelper @Inject constructor(private val auth: FirebaseAuth){
 
     fun isUserAuthenticatedInFirebase() = auth.currentUser != null
 
-    fun registrOrAuthUser(user: DataUserForAuth): LiveData<AuthorizationState<Boolean>> =
+    fun regUser(user: DataUserForAuth): LiveData<AuthorizationState<Boolean>> =
         liveData(Dispatchers.IO){
+
         Log.e("AuthoriztionData", "Loading")
         emit(AuthorizationState.Loading(data = null))
         try {
-            val isAuth = auth.createUserWithEmailAndPassword(user.email, user.password)
-            emit(AuthorizationState.Success(data = isAuth.isSuccessful))
+            val isAuth = auth.createUserWithEmailAndPassword(user.email, user.password).await()
+            Log.e("isAuth", "$isAuth")
+            emit(AuthorizationState.Success(data = true))
         } catch (e: Exception){
-            emit(AuthorizationState.Error(data = null, message = "Authentication failed!"))
+            e.message?.let { Log.e("isAuthError", it) }
+            emit(AuthorizationState.Error(data = null, message = e.message))
         }
+
     }
+
+    fun authUser(user: DataUserForAuth): LiveData<AuthorizationState<Boolean>> =
+        liveData(Dispatchers.IO){
+
+            Log.e("AuthoriztionData", "Loading")
+            emit(AuthorizationState.Loading(data = null))
+            try {
+                val isAuth = auth.signInWithEmailAndPassword(user.email, user.password).await()
+                Log.e("isAuth", "$isAuth")
+                emit(AuthorizationState.Success(data = true))
+            } catch (e: Exception){
+                e.message?.let { Log.e("isAuthError", it) }
+                emit(AuthorizationState.Error(data = null, message = e.message))
+            }
+
+        }
 
 }

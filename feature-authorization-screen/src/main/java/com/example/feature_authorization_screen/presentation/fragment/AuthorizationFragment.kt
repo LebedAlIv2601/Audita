@@ -81,11 +81,62 @@ class AuthorizationFragment : Fragment() {
                         email = emailEditText.text.toString(),
                         password = passwordEditText.text.toString()
                     )
-                    vm.authUser(user)
+                    if(repeatPasswordEditText.isVisible){
+                        regUser(user)
+                    } else {
+                        Log.e("callAuth", "Auth is calling")
+                        authUser(user)
+                    }
                 }
             }
 
         }
+    }
+
+    private fun checkRegOrAuthState(state: AuthorizationState<Boolean>){
+        when (state) {
+            is AuthorizationState.Success -> {
+                if(vm.checkUserAuth()){
+                    Log.e("AuthorizeState", "Success")
+                    binding?.authProgressBar?.visibility = View.GONE
+                    Toast.makeText(this@AuthorizationFragment.context,
+                        "Successfully authorized",
+                        Toast.LENGTH_SHORT).show()
+                } else {
+                    binding?.authProgressBar?.visibility = View.GONE
+                    Toast.makeText(this@AuthorizationFragment.context,
+                        "Not authorized",
+                        Toast.LENGTH_SHORT).show()
+                }
+            }
+            is AuthorizationState.Loading -> {
+                Log.e("AuthorizeState", "Loading")
+                binding?.authProgressBar?.visibility = View.VISIBLE
+            }
+            is AuthorizationState.Error -> {
+                Log.e("AuthorizeState", "Error")
+                binding?.authProgressBar?.visibility = View.GONE
+                Toast.makeText(this@AuthorizationFragment.context,
+                    state.message,
+                    Toast.LENGTH_SHORT).show()
+            }
+            is AuthorizationState.Waiting ->{
+                Log.e("AuthorizeState", "Waiting")
+                binding?.authProgressBar?.visibility = View.GONE
+            }
+        }
+    }
+
+    private fun authUser(user: UserForAuth) {
+        vm.authUser(user).observe(viewLifecycleOwner, Observer { state ->
+            checkRegOrAuthState(state)
+        })
+    }
+
+    private fun regUser(user: UserForAuth){
+        vm.regUser(user).observe(viewLifecycleOwner, Observer { state ->
+            checkRegOrAuthState(state)
+        })
     }
 
     private fun checkPassword(): Boolean {
@@ -110,7 +161,16 @@ class AuthorizationFragment : Fragment() {
                     ).show()
                     false
                 }
-            } else return true
+            } else if (passwordEditText.text.toString().length >= 8) {
+                return true
+            } else {
+                Toast.makeText(
+                    this@AuthorizationFragment.context,
+                    resources.getString(R.string.password_check_length_toast_text),
+                    Toast.LENGTH_SHORT
+                ).show()
+                return false
+            }
         }
         return false
     }
@@ -138,33 +198,6 @@ class AuthorizationFragment : Fragment() {
                         authButton.text = resources.getString(R.string.registr_button_text)
                         signInUpButton.text = resources.getString(R.string.sign_in_button_text)
                     }
-                }
-            }
-        })
-
-        vm.isAuthDone.observe(viewLifecycleOwner, Observer { state ->
-            when (state) {
-                is AuthorizationState.Success -> {
-                    Log.e("AuthorizeState", "Success")
-                    binding?.authProgressBar?.visibility = View.GONE
-                    Toast.makeText(this@AuthorizationFragment.context,
-                        "Successfully authorized",
-                        Toast.LENGTH_SHORT).show()
-                }
-                is AuthorizationState.Loading -> {
-                    Log.e("AuthorizeState", "Loading")
-                    binding?.authProgressBar?.visibility = View.VISIBLE
-                }
-                is AuthorizationState.Error -> {
-                    Log.e("AuthorizeState", "Error")
-                    binding?.authProgressBar?.visibility = View.GONE
-                    Toast.makeText(this@AuthorizationFragment.context,
-                        "Authorize error",
-                        Toast.LENGTH_SHORT).show()
-                }
-                is AuthorizationState.Waiting ->{
-                    Log.e("AuthorizeState", "Waiting")
-                    binding?.authProgressBar?.visibility = View.GONE
                 }
             }
         })

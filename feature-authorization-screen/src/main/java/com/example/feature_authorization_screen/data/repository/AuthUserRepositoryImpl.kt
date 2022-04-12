@@ -13,10 +13,12 @@ class AuthUserRepositoryImpl @Inject constructor(private val helper: FirebaseAut
     : AuthUserRepository {
 
 
-    override fun regOrAuthUser(user: UserForAuth): LiveData<AuthorizationState<Boolean>> {
-        Log.e("Ask", "asking for auth in repository")
-        return helper.registrOrAuthUser(user.toData())
-    }
+    override fun regUser(user: UserForAuth): LiveData<AuthorizationState<Boolean>> =
+        helper.regUser(user.toData())
+
+    override fun authUser(user: UserForAuth): LiveData<AuthorizationState<Boolean>> =
+        helper.authUser(user.toData())
+
 
     override fun isUserAuthenticated(): Boolean {
         return helper.isUserAuthenticatedInFirebase()
