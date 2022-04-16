@@ -50,6 +50,7 @@ dependencies {
 
     //Dagger
     implementation 'com.google.dagger:dagger:2.40'
+    implementation 'com.google.firebase:firebase-auth-ktx:21.0.3'
     kapt 'com.google.dagger:dagger-compiler:2.40'
 
     def version_coroutine = '1.6.1'

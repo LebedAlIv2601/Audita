@@ -2,11 +2,19 @@
 <navigation xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/nav_graph"
-    app:startDestination="@id/authorizationFragment">
+    app:startDestination="@id/splashFragment">
 
     <fragment
         android:id="@+id/authorizationFragment"
-
         android:name="com.example.feature_authorization_screen.presentation.fragment.AuthorizationFragment"
         android:label="AuthorizationFragment" />
+    <fragment
+        android:id="@+id/splashFragment"
+        android:name="com.example.feature_splash_screen.ui.SplashFragment"
+        android:label="SplashFragment" >
+        <action
+            android:id="@+id/action_splashFragment_to_authorizationFragment"
+            app:destination="@id/authorizationFragment"
+            app:popUpTo="@id/nav_graph" />
+    </fragment>
 </navigation>
