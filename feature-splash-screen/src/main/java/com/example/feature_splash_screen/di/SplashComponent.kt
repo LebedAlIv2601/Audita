@@ -2,8 +2,10 @@ package com.example.feature_splash_screen.di
 
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModel
+import com.example.feature_splash_screen.domain.repository.GetUserAuthRepository
 import com.example.feature_splash_screen.navigation.SplashNavCommandProvider
 import com.example.feature_splash_screen.ui.SplashFragment
+import com.google.firebase.auth.FirebaseAuth
 import dagger.Component
 import kotlin.properties.Delegates
 
@@ -23,6 +25,9 @@ internal interface SplashComponent {
 
 interface SplashDeps{
 
+    val auth: FirebaseAuth
+
+    val repoAuth: GetUserAuthRepository
     val splashNavCommandProvider: SplashNavCommandProvider
 
 }

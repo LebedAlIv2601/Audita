@@ -4,7 +4,9 @@ import com.example.audita.navigation.SplashNavCommandProviderImpl
 import com.example.feature_authorization_screen.data.repository.AuthUserRepositoryImpl
 import com.example.feature_authorization_screen.di.AuthorizationDeps
 import com.example.feature_authorization_screen.domain.repository.AuthUserRepository
+import com.example.feature_splash_screen.data.GetUserAuthRepositoryImpl
 import com.example.feature_splash_screen.di.SplashDeps
+import com.example.feature_splash_screen.domain.repository.GetUserAuthRepository
 import com.example.feature_splash_screen.navigation.SplashNavCommandProvider
 import com.google.firebase.auth.FirebaseAuth
 import dagger.Binds
@@ -18,6 +20,7 @@ interface AppComponent : AuthorizationDeps, SplashDeps {
 
     override val auth: FirebaseAuth
     override val repo: AuthUserRepository
+    override val repoAuth: GetUserAuthRepository
 
     override val splashNavCommandProvider: SplashNavCommandProvider
 
@@ -53,5 +56,10 @@ interface DomainModule{
     fun authUserRepositoryImplToAuthUserRepository(
         repository: AuthUserRepositoryImpl
     ): AuthUserRepository
+
+    @Binds
+    fun getAuthUserRepositoryImplToInterface(
+        repository: GetUserAuthRepositoryImpl
+    ): GetUserAuthRepository
 
 }

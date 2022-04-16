@@ -5,5 +5,5 @@ import com.example.core.NavCommand
 interface SplashNavCommandProvider {
 
     val toAuth: NavCommand
-
+    val toMain: NavCommand
 }
