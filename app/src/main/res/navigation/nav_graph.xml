@@ -7,7 +7,8 @@
     <fragment
         android:id="@+id/authorizationFragment"
         android:name="com.example.feature_authorization_screen.presentation.fragment.AuthorizationFragment"
-        android:label="AuthorizationFragment" />
+        android:label="AuthorizationFragment" >
+    </fragment>
     <fragment
         android:id="@+id/splashFragment"
         android:name="com.example.feature_splash_screen.ui.SplashFragment"
@@ -16,5 +17,15 @@
             android:id="@+id/action_splashFragment_to_authorizationFragment"
             app:destination="@id/authorizationFragment"
             app:popUpTo="@id/nav_graph" />
+        <action
+            android:id="@+id/action_splashFragment_to_mainFragment"
+            app:destination="@id/mainFragment"
+            app:popUpTo="@id/nav_graph" />
     </fragment>
+    <fragment
+        android:id="@+id/mainFragment"
+        android:name="com.example.feature_main_screen.MainFragment"
+        android:label="MainFragment" />
+
+
 </navigation>

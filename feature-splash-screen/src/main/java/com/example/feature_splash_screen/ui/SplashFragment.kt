@@ -6,17 +6,26 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.fragment.app.viewModels
 import androidx.lifecycle.ViewModelProvider
 import com.example.core.navigate
 import com.example.feature_splash_screen.R
 import com.example.feature_splash_screen.di.SplashComponentViewModel
 import com.example.feature_splash_screen.navigation.SplashNavCommandProvider
+import com.example.feature_splash_screen.ui.vm.SplashViewModel
 import javax.inject.Inject
 
 class SplashFragment : Fragment() {
 
     @Inject
     internal lateinit var splashNavCommandProvider: SplashNavCommandProvider
+
+    private val vm: SplashViewModel by viewModels {
+        vmFactory
+    }
+
+    @Inject
+    internal lateinit var vmFactory: SplashViewModel.Factory
 
     override fun onAttach(context: Context) {
         ViewModelProvider(this).get(SplashComponentViewModel::class.java)
@@ -33,7 +42,11 @@ class SplashFragment : Fragment() {
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        navigate(splashNavCommandProvider.toAuth)
+        if (vm.getAuth()) {
+            navigate(splashNavCommandProvider.toMain)
+        } else {
+            navigate(splashNavCommandProvider.toAuth)
+        }
         super.onViewCreated(view, savedInstanceState)
     }
 }
