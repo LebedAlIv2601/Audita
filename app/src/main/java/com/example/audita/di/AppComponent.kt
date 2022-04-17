@@ -1,9 +1,11 @@
 package com.example.audita.di
 
+import com.example.audita.navigation.AuthNavCommandProviderImpl
 import com.example.audita.navigation.SplashNavCommandProviderImpl
 import com.example.feature_authorization_screen.data.repository.AuthUserRepositoryImpl
 import com.example.feature_authorization_screen.di.AuthorizationDeps
 import com.example.feature_authorization_screen.domain.repository.AuthUserRepository
+import com.example.feature_authorization_screen.navigation.AuthNavCommandProvider
 import com.example.feature_splash_screen.data.GetUserAuthRepositoryImpl
 import com.example.feature_splash_screen.di.SplashDeps
 import com.example.feature_splash_screen.domain.repository.GetUserAuthRepository
@@ -22,6 +24,7 @@ interface AppComponent : AuthorizationDeps, SplashDeps {
     override val repo: AuthUserRepository
     override val repoAuth: GetUserAuthRepository
 
+    override val authNavCommandProvider: AuthNavCommandProvider
     override val splashNavCommandProvider: SplashNavCommandProvider
 
     @Component.Builder
@@ -47,6 +50,12 @@ interface NavigationModule{
     fun splashNavCommandProviderImplToInterface(
         provider: SplashNavCommandProviderImpl
     ): SplashNavCommandProvider
+
+    @Binds
+    fun authNavCommandProviderImplToInterface(
+        provider: AuthNavCommandProviderImpl
+    ): AuthNavCommandProvider
+
 }
 
 @Module
