@@ -8,6 +8,10 @@
         android:id="@+id/authorizationFragment"
         android:name="com.example.feature_authorization_screen.presentation.fragment.AuthorizationFragment"
         android:label="AuthorizationFragment" >
+        <action
+            android:id="@+id/action_authorizationFragment_to_mainFragment"
+            app:destination="@id/mainFragment"
+            app:popUpTo="@id/nav_graph" />
     </fragment>
     <fragment
         android:id="@+id/splashFragment"

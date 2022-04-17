@@ -14,10 +14,12 @@ import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
+import com.example.core.navigate
 import com.example.feature_authorization_screen.R
 import com.example.feature_authorization_screen.databinding.FragmentAuthorizationBinding
 import com.example.feature_authorization_screen.di.AuthorizationComponentViewModel
 import com.example.feature_authorization_screen.domain.model.UserForAuth
+import com.example.feature_authorization_screen.navigation.AuthNavCommandProvider
 import com.example.feature_authorization_screen.presentation.vm.AuthorizationViewModel
 import com.example.feature_authorization_screen.presentation.vm.AuthorizationViewModelFactory
 import com.example.feature_authorization_screen.utils.AuthScreenState
@@ -30,6 +32,9 @@ class AuthorizationFragment : Fragment() {
 
     @Inject
     internal lateinit var authorizationViewModelFactory: AuthorizationViewModelFactory
+
+    @Inject
+    internal lateinit var authNavCommandProvider: AuthNavCommandProvider
 
     private val vm: AuthorizationViewModel by viewModels{
         authorizationViewModelFactory
@@ -102,6 +107,7 @@ class AuthorizationFragment : Fragment() {
                     Toast.makeText(this@AuthorizationFragment.context,
                         "Successfully authorized",
                         Toast.LENGTH_SHORT).show()
+                    navigate(authNavCommandProvider.toMain)
                 } else {
                     binding?.authProgressBar?.visibility = View.GONE
                     Toast.makeText(this@AuthorizationFragment.context,
