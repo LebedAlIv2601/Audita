@@ -16,26 +16,59 @@ import dagger.Component
 import dagger.Module
 import dagger.Provides
 
+/**
+ * Главный Dagger компонент приложения.
+ * Служит для предоставления зависимостей всем модулям приложения.
+ */
 @Component(modules = [DataModule::class,
     DomainModule::class, NavigationModule::class])
 interface AppComponent : AuthorizationDeps, SplashDeps {
 
+    /**
+     * Поле для экземпляра FirebaseAuth
+     */
     override val auth: FirebaseAuth
+    /**
+     * Поле для экземпляра AuthUserRepository
+     */
     override val repo: AuthUserRepository
+    /**
+     * Поле для экземпляра GetUserAuthRepository
+     */
     override val repoAuth: GetUserAuthRepository
 
+    /**
+     * Поле для экземпляра AuthNavCommandProvider
+     */
     override val authNavCommandProvider: AuthNavCommandProvider
+    /**
+     * Поле для экземпляра SplashNavCommandProvider
+     */
     override val splashNavCommandProvider: SplashNavCommandProvider
 
+    /**
+     * Builder для AppComponent
+     */
     @Component.Builder
     interface Builder{
+        /**
+         * Функция для создания AppComponent
+         */
         fun build(): AppComponent
     }
 }
 
+/**
+ * Dagger модуль для предоставления зависимостей в data-слое модулей приложения.
+ */
 @Module
 class DataModule{
 
+    /**
+     * Предоставление экземпляра FirebaseAuth
+     * @return FirebaseAuth: экземпляр FirebaseAuth для работы с авторизацией пользователя
+     * в Firebase.
+     */
     @Provides
     fun provideFirebaseAuth(): FirebaseAuth {
         return FirebaseAuth.getInstance()
@@ -43,14 +76,27 @@ class DataModule{
 
 }
 
+/**
+ * Dagger модуль для предоставления зависимостей в data-слое модулей приложения.
+ */
 @Module
 interface NavigationModule{
 
+    /**
+     * Функция для получения экземпляра интерфейса SplashNavCommandProvider
+     * @param provider: реализация SplashNavCommandProvider
+     * @return SplashNavCommandProvider: экземпляр интерфейса SplashNavCommandProvider
+     */
     @Binds
     fun splashNavCommandProviderImplToInterface(
         provider: SplashNavCommandProviderImpl
     ): SplashNavCommandProvider
 
+    /**
+     * Функция для получения экземпляра интерфейса AuthNavCommandProvider
+     * @param provider: реализация AuthNavCommandProvider
+     * @return SplashNavCommandProvider: экземпляр интерфейса AuthNavCommandProvider
+     */
     @Binds
     fun authNavCommandProviderImplToInterface(
         provider: AuthNavCommandProviderImpl
@@ -58,14 +104,27 @@ interface NavigationModule{
 
 }
 
+/**
+ * Dagger модуль для предоставления зависимостей в domain-слое модулей приложения.
+ */
 @Module
 interface DomainModule{
 
+    /**
+     * Функция для получения экземпляра интерфейса AuthUserRepository
+     * @param repository: реализация AuthUserRepository
+     * @return AuthUserRepository: экземпляр интерфейса AuthUserRepository
+     */
     @Binds
     fun authUserRepositoryImplToAuthUserRepository(
         repository: AuthUserRepositoryImpl
     ): AuthUserRepository
 
+    /**
+     * Функция для получения экземпляра интерфейса GetUserAuthRepository
+     * @param repository: реализация GetUserAuthRepository
+     * @return GetUserAuthRepository: экземпляр интерфейса GetUserAuthRepository
+     */
     @Binds
     fun getAuthUserRepositoryImplToInterface(
         repository: GetUserAuthRepositoryImpl
