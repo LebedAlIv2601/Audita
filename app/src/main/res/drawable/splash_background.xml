@@ -1,10 +1,26 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layer-list xmlns:android="http://schemas.android.com/apk/res/android">
 
-    <item android:drawable="@color/white"/>
+    <item
+        android:drawable="@color/yellow_main"/>
 
     <item>
-        <bitmap android:gravity="center"
-            android:src="@drawable/logo"/>
+        <bitmap
+            android:gravity="center"
+            android:src="@drawable/app_title" />
     </item>
+
+    <item android:bottom="90dp">
+        <bitmap
+            android:gravity="center"
+            android:src="@drawable/logo" />
+    </item>
+
+    <item
+        android:bottom="90dp">
+        <bitmap
+            android:gravity="bottom"
+            android:src="@drawable/logo_company"/>
+    </item>
+
 </layer-list>
