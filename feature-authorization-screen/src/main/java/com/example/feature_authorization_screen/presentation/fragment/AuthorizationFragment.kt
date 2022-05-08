@@ -14,6 +14,7 @@ import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
+import com.example.core.Constants
 import com.example.core.navigate
 import com.example.feature_authorization_screen.R
 import com.example.feature_authorization_screen.databinding.FragmentAuthorizationBinding
@@ -65,6 +66,10 @@ class AuthorizationFragment : Fragment() {
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+
+        if(arguments?.getInt("state") == Constants.AUTH_SCREEN_REG_STATE){
+            vm.changeAuthScreenState()
+        }
 
         setupListeners()
         setupObservers()

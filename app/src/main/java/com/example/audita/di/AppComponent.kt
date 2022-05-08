@@ -1,11 +1,14 @@
 package com.example.audita.di
 
 import com.example.audita.navigation.AuthNavCommandProviderImpl
+import com.example.audita.navigation.LogOutNavCommandProviderImpl
 import com.example.audita.navigation.SplashNavCommandProviderImpl
 import com.example.feature_authorization_screen.data.repository.AuthUserRepositoryImpl
 import com.example.feature_authorization_screen.di.AuthorizationDeps
 import com.example.feature_authorization_screen.domain.repository.AuthUserRepository
 import com.example.feature_authorization_screen.navigation.AuthNavCommandProvider
+import com.example.feature_log_out_screen.di.LogOutDeps
+import com.example.feature_log_out_screen.navigation.LogOutNavCommandProvider
 import com.example.feature_splash_screen.data.GetUserAuthRepositoryImpl
 import com.example.feature_splash_screen.di.SplashDeps
 import com.example.feature_splash_screen.domain.repository.GetUserAuthRepository
@@ -22,7 +25,7 @@ import dagger.Provides
  */
 @Component(modules = [DataModule::class,
     DomainModule::class, NavigationModule::class])
-interface AppComponent : AuthorizationDeps, SplashDeps {
+interface AppComponent : AuthorizationDeps, SplashDeps, LogOutDeps {
 
     /**
      * Поле для экземпляра FirebaseAuth
@@ -45,6 +48,8 @@ interface AppComponent : AuthorizationDeps, SplashDeps {
      * Поле для экземпляра SplashNavCommandProvider
      */
     override val splashNavCommandProvider: SplashNavCommandProvider
+
+    override val logOutNavCommandProvider: LogOutNavCommandProvider
 
     /**
      * Builder для AppComponent
@@ -101,6 +106,12 @@ interface NavigationModule{
     fun authNavCommandProviderImplToInterface(
         provider: AuthNavCommandProviderImpl
     ): AuthNavCommandProvider
+
+
+    @Binds
+    fun logOutNavCommandImplToInterface(
+        provider: LogOutNavCommandProviderImpl
+    ): LogOutNavCommandProvider
 
 }
 

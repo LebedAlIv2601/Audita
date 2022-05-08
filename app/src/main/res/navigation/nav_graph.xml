@@ -18,18 +18,26 @@
         android:name="com.example.feature_splash_screen.ui.SplashFragment"
         android:label="SplashFragment" >
         <action
-            android:id="@+id/action_splashFragment_to_authorizationFragment"
-            app:destination="@id/authorizationFragment"
-            app:popUpTo="@id/nav_graph" />
-        <action
             android:id="@+id/action_splashFragment_to_mainFragment"
             app:destination="@id/mainFragment"
+            app:popUpTo="@id/nav_graph" />
+        <action
+            android:id="@+id/action_splashFragment_to_logOutFragment"
+            app:destination="@id/logOutFragment"
             app:popUpTo="@id/nav_graph" />
     </fragment>
     <fragment
         android:id="@+id/mainFragment"
         android:name="com.example.feature_main_screen.MainFragment"
         android:label="MainFragment" />
+    <fragment
+        android:id="@+id/logOutFragment"
+        android:name="com.example.feature_log_out_screen.presentation.LogOutFragment"
+        android:label="LogOutFragment" >
+        <action
+            android:id="@+id/action_logOutFragment_to_authorizationFragment"
+            app:destination="@id/authorizationFragment" />
+    </fragment>
 
 
 </navigation>

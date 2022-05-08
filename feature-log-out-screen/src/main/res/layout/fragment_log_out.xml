@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/yellow_third"
+    tools:context=".presentation.LogOutFragment">
+
+    <ImageView
+        android:id="@+id/imageView2"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:scaleType="fitStart"
+        android:src="@drawable/background_musician" />
+
+    <com.google.android.material.card.MaterialCardView
+        android:id="@+id/logout_reg_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="48dp"
+        app:cardBackgroundColor="@color/yellow_third"
+        app:cardCornerRadius="19.23dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toEndOf="@+id/logout_auth_button"
+        app:strokeColor="@color/black"
+        app:strokeWidth="5.76dp">
+
+        <com.google.android.material.textview.MaterialTextView
+            android:layout_width="150dp"
+            android:layout_height="60dp"
+            android:fontFamily="@font/roboto_bold"
+            android:gravity="center"
+            android:text="@string/reg_text"
+            android:textColor="@color/black"
+            android:textSize="16sp" />
+
+    </com.google.android.material.card.MaterialCardView>
+
+    <com.google.android.material.card.MaterialCardView
+        android:id="@+id/logout_auth_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="48dp"
+        app:cardBackgroundColor="@color/black"
+        app:cardCornerRadius="19.23dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/logout_reg_button"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:strokeColor="@color/black"
+        app:strokeWidth="5.76dp">
+
+        <com.google.android.material.textview.MaterialTextView
+            android:layout_width="150dp"
+            android:layout_height="60dp"
+            android:fontFamily="@font/roboto_bold"
+            android:gravity="center"
+            android:text="@string/auth_text"
+            android:textColor="@color/yellow_second"
+            android:textSize="16sp" />
+
+    </com.google.android.material.card.MaterialCardView>
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

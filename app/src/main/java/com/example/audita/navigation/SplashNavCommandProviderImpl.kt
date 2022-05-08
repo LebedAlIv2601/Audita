@@ -14,9 +14,9 @@ class SplashNavCommandProviderImpl @Inject constructor() : SplashNavCommandProvi
 
 
     /**
-     * Реализация команды перехода на AuthorizationFragment
+     * Реализация команды перехода на LogOutFragment
      */
-    override val toAuth: NavCommand = NavCommand(R.id.action_splashFragment_to_authorizationFragment)
+    override val toLogOut: NavCommand = NavCommand(R.id.action_splashFragment_to_logOutFragment)
 
     /**
      * Реализация команды перехода на MainFragment
