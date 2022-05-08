@@ -6,6 +6,8 @@ import android.app.Application
 import com.example.audita.di.AppComponent
 import com.example.audita.di.DaggerAppComponent
 import com.example.feature_authorization_screen.di.AuthorizationDepsStore
+import com.example.feature_log_out_screen.di.LogOutDeps
+import com.example.feature_log_out_screen.di.LogOutDepsStore
 import com.example.feature_splash_screen.di.SplashDepsStore
 
 /**
@@ -33,5 +35,6 @@ class AuditaApp : Application() {
         super.onCreate()
         AuthorizationDepsStore.deps = appComponent
         SplashDepsStore.deps = appComponent
+        LogOutDepsStore.deps = appComponent
     }
 }

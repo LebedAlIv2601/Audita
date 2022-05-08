@@ -68,6 +68,7 @@ dependencies {
     implementation project(path: ':feature-authorization-screen')
     implementation project(path: ':feature-splash-screen')
     implementation project(path: ':feature-main-screen')
+    implementation project(path: ':feature-log-out-screen')
 
 
     implementation project(path: ':core')

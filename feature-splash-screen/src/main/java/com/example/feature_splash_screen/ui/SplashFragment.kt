@@ -45,7 +45,7 @@ class SplashFragment : Fragment() {
         if (vm.getAuth()) {
             navigate(splashNavCommandProvider.toMain)
         } else {
-            navigate(splashNavCommandProvider.toAuth)
+            navigate(splashNavCommandProvider.toLogOut)
         }
         super.onViewCreated(view, savedInstanceState)
     }
