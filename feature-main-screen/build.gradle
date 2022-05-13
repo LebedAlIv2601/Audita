@@ -57,4 +57,5 @@ dependencies {
 
     //core
     implementation project(path: ':core')
+    implementation project(path: ':feature-search-screen')
 }

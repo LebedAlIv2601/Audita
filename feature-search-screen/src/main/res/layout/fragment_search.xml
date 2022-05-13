@@ -7,10 +7,16 @@
     tools:context=".presentation.SearchFragment">
 
     <androidx.recyclerview.widget.RecyclerView
-        android:layout_width="match_parent"
+        android:id="@+id/userRecyclerView"
+        android:layout_width="wrap_content"
         android:layout_height="0dp"
+        android:layout_gravity="center"
+        app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/constraintLayout" />
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/constraintLayout"
+        app:spanCount="2" />
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/constraintLayout"
@@ -24,8 +30,8 @@
 
         <ImageView
             android:id="@+id/sideMenuImageView"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
             android:layout_marginStart="25dp"
             android:src="@drawable/ic_side_menu"
             app:layout_constraintBottom_toBottomOf="@+id/searchView"
@@ -46,8 +52,8 @@
 
         <ImageView
             android:id="@+id/filterImageView"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
             android:layout_marginRight="25dp"
             android:src="@drawable/ic_filter"
             app:layout_constraintBottom_toBottomOf="@+id/searchView"

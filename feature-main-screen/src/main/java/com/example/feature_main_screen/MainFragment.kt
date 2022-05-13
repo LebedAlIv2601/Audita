@@ -7,7 +7,9 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.lifecycle.ViewModelProvider
-import com.example.core.navigate
+import androidx.navigation.fragment.findNavController
+//import androidx.navigation.Navigation.findNavController
+import androidx.navigation.ui.setupWithNavController
 import com.example.feature_main_screen.databinding.FragmentMainBinding
 import com.example.feature_main_screen.di.MainComponentViewModel
 import com.example.feature_main_screen.navigation.MainNavCommandProvider
@@ -33,18 +35,25 @@ class MainFragment : Fragment() {
 
         binding = FragmentMainBinding.bind(inflater.inflate(R.layout.fragment_main, container, false))
 
-        //navigate(mainNavCommandProvider.toSearch, R.id.fragment_container)
-        navigate(mainNavCommandProvider.toSearch)
-/*
-        binding?.bottomNavigationView?.setOnItemReselectedListener {
+        //val navController = findNavController(requireActivity(), R.id.nav_host_fragment)
+        val navController = findNavController()
+
+        binding?.bottomNavigationView?.setupWithNavController(navController)
+
+        //navigate(mainNavCommandProvider.toSearch, R.id.nav_host_fragment)
+        //navigate(mainNavCommandProvider.toSearch)
+
+        //navigate(NavCommand(R.id.action_placeholder_to_search_bottom_nav))
+
+        /*binding?.bottomNavigationView?.setOnItemReselectedListener {
             when(it.itemId){
-                R.id.search_bottom_nav-> navigate(mainNavCommandProvider.toSearch, R.id.fragment_container)
-                R.id.chat_bottom_nav-> navigate(mainNavCommandProvider.toSearch, R.id.fragment_container)
-                R.id.profile_bottom_nav-> navigate(mainNavCommandProvider.toSearch, R.id.fragment_container)
+                R.id.search_bottom_nav-> navigate(NavCommand(R.id.action_placeholder_to_search_bottom_nav))
+                R.id.chat_bottom_nav-> navigate(NavCommand(R.id.action_placeholder_to_chat_bottom_nav))
+                R.id.profile_bottom_nav-> navigate(NavCommand(R.id.action_placeholder_to_profile_bottom_nav))
             }
             true
-        }
-*/
+        }*/
+
         return binding?.root
     }
 
