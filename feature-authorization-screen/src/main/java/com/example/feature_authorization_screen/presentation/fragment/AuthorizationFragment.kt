@@ -61,13 +61,6 @@ class AuthorizationFragment : Fragment() {
         binding = DataBindingUtil.inflate(inflater, R.layout.fragment_authorization,
             container, false)
 
-
-//        if(vm.checkUserAuth()){
-//            Toast.makeText(this.context, "User already auth", Toast.LENGTH_LONG).show()
-//        } else {
-//            Toast.makeText(this.context, "User not auth", Toast.LENGTH_LONG).show()
-//        }
-
         return binding?.root
     }
 
@@ -84,29 +77,25 @@ class AuthorizationFragment : Fragment() {
     }
 
     private fun setupListeners() {
-//        binding?.apply {
-//
-//            signInUpButton.setOnClickListener {
-//                vm.changeAuthScreenState()
-//            }
-//
-//            authButton.setOnClickListener {
-//                if(checkPassword()) {
-//                    val user = UserForAuth(
-//                        nickname = nicknameEditText.text.toString(),
-//                        email = emailEditText.text.toString(),
-//                        password = passwordEditText.text.toString()
-//                    )
-//                    if(repeatPasswordEditText.isVisible){
-//                        regUser(user)
-//                    } else {
-//                        Log.e("callAuth", "Auth is calling")
-//                        authUser(user)
-//                    }
-//                }
-//            }
-//
-//        }
+        binding?.apply {
+
+            buttonRegOrAuthUser.setOnClickListener {
+                if(checkPassword() && checkNickname()) {
+                    val user = UserForAuth(
+                        nickname = nicknameEditText.text.toString(),
+                        email = emailEditText.text.toString(),
+                        password = passwordEditText.text.toString()
+                    )
+                    if(repeatPasswordCardView.isVisible){
+                        regUser(user)
+                    } else {
+                        Log.e("callAuth", "Auth is calling")
+                        authUser(user)
+                    }
+                }
+            }
+
+        }
     }
 
     private fun checkRegOrAuthState(state: AuthorizationState<Boolean>){
@@ -156,9 +145,27 @@ class AuthorizationFragment : Fragment() {
         })
     }
 
+    private fun checkNickname(): Boolean{
+        binding?.apply {
+            if(nicknameCardView.isVisible) {
+                return if (nicknameEditText.text.toString().isEmpty()){
+                    Toast.makeText(
+                        this@AuthorizationFragment.context,
+                        resources.getString(R.string.nickname_check_empty_toast_text),
+                        Toast.LENGTH_SHORT
+                    ).show()
+                    false
+                } else{
+                    true
+                }
+            } else return true
+        }
+        return false
+    }
+
     private fun checkPassword(): Boolean {
         binding?.apply {
-            if(repeatPasswordEditText.isVisible) {
+            if(repeatPasswordCardView.isVisible) {
                 return if (passwordEditText.text.toString() == repeatPasswordEditText.text.toString()) {
                     if (passwordEditText.text.toString().length >= 8) {
                         true
@@ -206,8 +213,6 @@ class AuthorizationFragment : Fragment() {
                         buttonRegOrAuthUserTextView.setTextColor(ResourcesCompat.getColor(resources,
                             R.color.yellow_second, null))
                         buttonRegOrAuthUserTextView.text = getString(R.string.button_next_text)
-//                        authButton.text = resources.getString(R.string.auth_button_text)
-//                        signInUpButton.text = resources.getString(R.string.sign_up_button_text)
                     }
                 }
                 AuthScreenState.SIGN_UP -> {
@@ -220,8 +225,6 @@ class AuthorizationFragment : Fragment() {
                         buttonRegOrAuthUserTextView.setTextColor(ResourcesCompat.getColor(resources,
                             R.color.black, null))
                         buttonRegOrAuthUserTextView.text = getString(R.string.reg_button_text)
-//                        authButton.text = resources.getString(R.string.registr_button_text)
-//                        signInUpButton.text = resources.getString(R.string.sign_in_button_text)
                     }
                 }
             }

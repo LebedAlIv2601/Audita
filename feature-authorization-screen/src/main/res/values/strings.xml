@@ -19,5 +19,6 @@
 
     <string name="reg_button_text">Заполнить анкету</string>
     <string name="button_next_text">Далее</string>
+    <string name="nickname_check_empty_toast_text">Необходимо указать никнейм</string>
 
 </resources>
