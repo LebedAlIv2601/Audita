@@ -2,13 +2,16 @@ package com.example.feature_authorization_screen.presentation.fragment
 
 
 import android.content.Context
+import android.graphics.Color
 import android.os.Bundle
 import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.view.inputmethod.EditorInfo
 import android.widget.Toast
+import androidx.core.content.res.ResourcesCompat
 import androidx.core.view.isVisible
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.viewModels
@@ -52,15 +55,18 @@ class AuthorizationFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
 
+        activity?.window?.statusBarColor = ResourcesCompat.getColor(resources,
+            R.color.yellow_second, null)
+
         binding = DataBindingUtil.inflate(inflater, R.layout.fragment_authorization,
             container, false)
 
 
-        if(vm.checkUserAuth()){
-            Toast.makeText(this.context, "User already auth", Toast.LENGTH_LONG).show()
-        } else {
-            Toast.makeText(this.context, "User not auth", Toast.LENGTH_LONG).show()
-        }
+//        if(vm.checkUserAuth()){
+//            Toast.makeText(this.context, "User already auth", Toast.LENGTH_LONG).show()
+//        } else {
+//            Toast.makeText(this.context, "User not auth", Toast.LENGTH_LONG).show()
+//        }
 
         return binding?.root
     }
@@ -78,29 +84,29 @@ class AuthorizationFragment : Fragment() {
     }
 
     private fun setupListeners() {
-        binding?.apply {
-
-            signInUpButton.setOnClickListener {
-                vm.changeAuthScreenState()
-            }
-
-            authButton.setOnClickListener {
-                if(checkPassword()) {
-                    val user = UserForAuth(
-                        nickname = nicknameEditText.text.toString(),
-                        email = emailEditText.text.toString(),
-                        password = passwordEditText.text.toString()
-                    )
-                    if(repeatPasswordEditText.isVisible){
-                        regUser(user)
-                    } else {
-                        Log.e("callAuth", "Auth is calling")
-                        authUser(user)
-                    }
-                }
-            }
-
-        }
+//        binding?.apply {
+//
+//            signInUpButton.setOnClickListener {
+//                vm.changeAuthScreenState()
+//            }
+//
+//            authButton.setOnClickListener {
+//                if(checkPassword()) {
+//                    val user = UserForAuth(
+//                        nickname = nicknameEditText.text.toString(),
+//                        email = emailEditText.text.toString(),
+//                        password = passwordEditText.text.toString()
+//                    )
+//                    if(repeatPasswordEditText.isVisible){
+//                        regUser(user)
+//                    } else {
+//                        Log.e("callAuth", "Auth is calling")
+//                        authUser(user)
+//                    }
+//                }
+//            }
+//
+//        }
     }
 
     private fun checkRegOrAuthState(state: AuthorizationState<Boolean>){
@@ -192,22 +198,30 @@ class AuthorizationFragment : Fragment() {
             when (state){
                 AuthScreenState.SIGN_IN -> {
                     binding?.apply {
-                        nicknameEditText.visibility = View.GONE
-                        nicknameLabelTextView.visibility = View.GONE
-                        repeatPasswordEditText.visibility = View.GONE
-                        repeatPasswordLabelTextView.visibility = View.GONE
-                        authButton.text = resources.getString(R.string.auth_button_text)
-                        signInUpButton.text = resources.getString(R.string.sign_up_button_text)
+                        nicknameCardView.visibility = View.GONE
+                        repeatPasswordCardView.visibility = View.GONE
+                        passwordEditText.imeOptions = EditorInfo.IME_ACTION_DONE
+                        buttonRegOrAuthUser.setCardBackgroundColor(ResourcesCompat.getColor(resources,
+                            R.color.black, null))
+                        buttonRegOrAuthUserTextView.setTextColor(ResourcesCompat.getColor(resources,
+                            R.color.yellow_second, null))
+                        buttonRegOrAuthUserTextView.text = getString(R.string.button_next_text)
+//                        authButton.text = resources.getString(R.string.auth_button_text)
+//                        signInUpButton.text = resources.getString(R.string.sign_up_button_text)
                     }
                 }
                 AuthScreenState.SIGN_UP -> {
                     binding?.apply {
-                        nicknameEditText.visibility = View.VISIBLE
-                        nicknameLabelTextView.visibility = View.VISIBLE
-                        repeatPasswordEditText.visibility = View.VISIBLE
-                        repeatPasswordLabelTextView.visibility = View.VISIBLE
-                        authButton.text = resources.getString(R.string.registr_button_text)
-                        signInUpButton.text = resources.getString(R.string.sign_in_button_text)
+                        nicknameCardView.visibility = View.VISIBLE
+                        repeatPasswordCardView.visibility = View.VISIBLE
+                        passwordEditText.imeOptions = EditorInfo.IME_ACTION_NEXT
+                        buttonRegOrAuthUser.setCardBackgroundColor(ResourcesCompat.getColor(resources,
+                            R.color.yellow_second, null))
+                        buttonRegOrAuthUserTextView.setTextColor(ResourcesCompat.getColor(resources,
+                            R.color.black, null))
+                        buttonRegOrAuthUserTextView.text = getString(R.string.reg_button_text)
+//                        authButton.text = resources.getString(R.string.registr_button_text)
+//                        signInUpButton.text = resources.getString(R.string.sign_in_button_text)
                     }
                 }
             }
