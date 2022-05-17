@@ -1,0 +1,24 @@
+<resources>
+
+    <string name="email_label_text">Почта</string>
+    <string name="nickname_label_text">Никнейм</string>
+    <string name="password_label_text">Пароль</string>
+    <string name="repeat_password_label_text">Подтвердите пароль</string>
+    <string name="auth_button_text">Войти</string>
+    <string name="registr_button_text">Регистрация</string>
+    <string name="sign_in_button_text">Войти</string>
+    <string name="sign_up_button_text">Зарегистрироваться</string>
+
+    <string name="password_check_length_toast_text">Длина пароля должна составлять не меньше 8 символов</string>
+    <string name="password_check_repeat_toast_text">Пароли не совпадают</string>
+
+    <string name="nickname_hint">Введите никнейм</string>
+    <string name="email_hint">Введите почту</string>
+    <string name="password_hint">Введите пароль</string>
+    <string name="password_repeat_hint">Повторите пароль</string>
+
+    <string name="reg_button_text">Заполнить анкету</string>
+    <string name="button_next_text">Далее</string>
+    <string name="nickname_check_empty_toast_text">Необходимо указать никнейм</string>
+
+</resources>

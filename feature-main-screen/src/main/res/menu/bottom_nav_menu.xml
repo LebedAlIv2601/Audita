@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item android:id="@+id/search_bottom_nav"
+        android:title="Search"
+        android:iconTint="@color/black"
+        android:icon="@drawable/ic_baseline_search_24"
+        android:enabled="true"/>
+
+    <item android:id="@+id/chat_bottom_nav"
+        android:title="Chat"
+        android:iconTint="@color/black"
+        android:icon="@drawable/ic_baseline_chat_bubble_outline_24"
+        android:enabled="true"/>
+
+    <item android:id="@+id/profile_bottom_nav"
+        android:title="Profile"
+        android:iconTint="@color/black"
+        android:icon="@drawable/ic_baseline_person_24"
+        android:enabled="true"/>
+</menu>
