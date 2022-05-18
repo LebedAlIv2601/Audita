@@ -29,7 +29,8 @@
     <fragment
         android:id="@+id/mainFragment"
         android:name="com.example.feature_main_screen.MainFragment"
-        android:label="MainFragment" />
+        android:label="MainFragment" >
+    </fragment>
     <fragment
         android:id="@+id/logOutFragment"
         android:name="com.example.feature_log_out_screen.presentation.LogOutFragment"
@@ -38,6 +39,9 @@
             android:id="@+id/action_logOutFragment_to_authorizationFragment"
             app:destination="@id/authorizationFragment" />
     </fragment>
+
+
+
 
 
 </navigation>

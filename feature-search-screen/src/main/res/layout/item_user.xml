@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:paddingTop="15dp"
+    android:paddingBottom="5dp"
+    android:paddingRight="20dp"
+    android:paddingLeft="20dp"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/cardView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:cardCornerRadius="53dp"
+        app:cardElevation="1dp"
+        android:elevation="0dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+        <ImageView
+            android:id="@+id/imageViewProfile"
+            android:layout_width="150dp"
+            android:layout_height="150dp"
+            android:elevation="0dp"
+            android:scaleType="center"
+            app:srcCompat="@drawable/man1" />
+    </androidx.cardview.widget.CardView>
+
+    <com.google.android.material.card.MaterialCardView
+        android:id="@+id/cardViewLevel"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:cardElevation="5dp"
+        app:cardCornerRadius="40dp"
+        app:layout_constraintBottom_toBottomOf="@+id/cardView"
+        app:layout_constraintEnd_toEndOf="@+id/cardView"
+        app:strokeColor="@android:color/black"
+        app:strokeWidth="1dp">
+
+        <ImageView
+            android:id="@+id/imageViewLevel"
+            android:layout_width="25dp"
+            android:layout_height="25dp"
+            android:padding="4dp"
+            app:srcCompat="@drawable/ic_level" />
+    </com.google.android.material.card.MaterialCardView>
+
+    <com.google.android.material.card.MaterialCardView
+        android:id="@+id/cardViewInstrument"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:cardCornerRadius="40dp"
+        app:cardElevation="5dp"
+        app:layout_constraintBottom_toBottomOf="@+id/cardView"
+        app:layout_constraintStart_toStartOf="@+id/cardView"
+        app:strokeColor="@android:color/black"
+        app:strokeWidth="1dp">
+
+        <ImageView
+            android:id="@+id/imageViewInstrument"
+            android:layout_width="25dp"
+            android:layout_height="25dp"
+            android:padding="4dp"
+            app:srcCompat="@drawable/ic_drum" />
+    </com.google.android.material.card.MaterialCardView>
+
+    <TextView
+        android:id="@+id/nickTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/roboto_bold"
+        android:textSize="18sp"
+        android:textColor="@android:color/black"
+        android:text="Доооора"
+        app:layout_constraintEnd_toEndOf="@+id/cardView"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/cardView" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
