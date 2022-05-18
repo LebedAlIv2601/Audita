@@ -54,8 +54,6 @@ interface AppComponent : AuthorizationDeps, SplashDeps, LogOutDeps, MainDeps {
 
     override val logOutNavCommandProvider: LogOutNavCommandProvider
 
-    override val mainNavCommandProvider: MainNavCommandProvider
-
     /**
      * Builder для AppComponent
      */

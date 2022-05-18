@@ -30,9 +30,6 @@
         android:id="@+id/mainFragment"
         android:name="com.example.feature_main_screen.MainFragment"
         android:label="MainFragment" >
-        <action
-            android:id="@+id/action_mainFragment_to_searchFragment"
-            app:destination="@id/searchFragment" />
     </fragment>
     <fragment
         android:id="@+id/logOutFragment"
@@ -42,10 +39,9 @@
             android:id="@+id/action_logOutFragment_to_authorizationFragment"
             app:destination="@id/authorizationFragment" />
     </fragment>
-    <fragment
-        android:id="@+id/searchFragment"
-        android:name="com.vas.feature_search_screen.presentation.SearchFragment"
-        android:label="SearchFragment" />
+
+
+
 
 
 </navigation>
