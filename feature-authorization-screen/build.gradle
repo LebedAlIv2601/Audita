@@ -3,6 +3,7 @@ plugins {
     id 'kotlin-android'
     id 'com.google.gms.google-services'
     id 'kotlin-kapt'
+    id 'org.jetbrains.dokka'
 }
 
 android {
@@ -52,6 +53,8 @@ dependencies {
     implementation 'com.google.dagger:dagger:2.40'
     implementation 'com.google.firebase:firebase-auth-ktx:21.0.3'
     kapt 'com.google.dagger:dagger-compiler:2.40'
+
+    implementation project(path: ':core')
 
     def version_coroutine = '1.6.1'
     implementation "org.jetbrains.kotlinx:kotlinx-coroutines-core:$version_coroutine"

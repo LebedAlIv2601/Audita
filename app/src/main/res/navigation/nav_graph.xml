@@ -8,24 +8,44 @@
         android:id="@+id/authorizationFragment"
         android:name="com.example.feature_authorization_screen.presentation.fragment.AuthorizationFragment"
         android:label="AuthorizationFragment" >
+        <action
+            android:id="@+id/action_authorizationFragment_to_mainFragment"
+            app:destination="@id/mainFragment"
+            app:popUpTo="@id/nav_graph" />
     </fragment>
     <fragment
         android:id="@+id/splashFragment"
         android:name="com.example.feature_splash_screen.ui.SplashFragment"
         android:label="SplashFragment" >
         <action
-            android:id="@+id/action_splashFragment_to_authorizationFragment"
-            app:destination="@id/authorizationFragment"
-            app:popUpTo="@id/nav_graph" />
-        <action
             android:id="@+id/action_splashFragment_to_mainFragment"
             app:destination="@id/mainFragment"
+            app:popUpTo="@id/nav_graph" />
+        <action
+            android:id="@+id/action_splashFragment_to_logOutFragment"
+            app:destination="@id/logOutFragment"
             app:popUpTo="@id/nav_graph" />
     </fragment>
     <fragment
         android:id="@+id/mainFragment"
         android:name="com.example.feature_main_screen.MainFragment"
-        android:label="MainFragment" />
+        android:label="MainFragment" >
+        <action
+            android:id="@+id/action_mainFragment_to_searchFragment"
+            app:destination="@id/searchFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/logOutFragment"
+        android:name="com.example.feature_log_out_screen.presentation.LogOutFragment"
+        android:label="LogOutFragment" >
+        <action
+            android:id="@+id/action_logOutFragment_to_authorizationFragment"
+            app:destination="@id/authorizationFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/searchFragment"
+        android:name="com.vas.feature_search_screen.presentation.SearchFragment"
+        android:label="SearchFragment" />
 
 
 </navigation>

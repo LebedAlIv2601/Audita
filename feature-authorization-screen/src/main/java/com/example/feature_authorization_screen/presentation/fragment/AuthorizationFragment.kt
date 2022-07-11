@@ -2,22 +2,28 @@ package com.example.feature_authorization_screen.presentation.fragment
 
 
 import android.content.Context
+import android.graphics.Color
 import android.os.Bundle
 import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.view.inputmethod.EditorInfo
 import android.widget.Toast
+import androidx.core.content.res.ResourcesCompat
 import androidx.core.view.isVisible
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
+import com.example.core.Constants
+import com.example.core.navigate
 import com.example.feature_authorization_screen.R
 import com.example.feature_authorization_screen.databinding.FragmentAuthorizationBinding
 import com.example.feature_authorization_screen.di.AuthorizationComponentViewModel
 import com.example.feature_authorization_screen.domain.model.UserForAuth
+import com.example.feature_authorization_screen.navigation.AuthNavCommandProvider
 import com.example.feature_authorization_screen.presentation.vm.AuthorizationViewModel
 import com.example.feature_authorization_screen.presentation.vm.AuthorizationViewModelFactory
 import com.example.feature_authorization_screen.utils.AuthScreenState
@@ -30,6 +36,9 @@ class AuthorizationFragment : Fragment() {
 
     @Inject
     internal lateinit var authorizationViewModelFactory: AuthorizationViewModelFactory
+
+    @Inject
+    internal lateinit var authNavCommandProvider: AuthNavCommandProvider
 
     private val vm: AuthorizationViewModel by viewModels{
         authorizationViewModelFactory
@@ -46,20 +55,20 @@ class AuthorizationFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
 
+        activity?.window?.statusBarColor = ResourcesCompat.getColor(resources,
+            R.color.yellow_second, null)
+
         binding = DataBindingUtil.inflate(inflater, R.layout.fragment_authorization,
             container, false)
-
-
-        if(vm.checkUserAuth()){
-            Toast.makeText(this.context, "User already auth", Toast.LENGTH_LONG).show()
-        } else {
-            Toast.makeText(this.context, "User not auth", Toast.LENGTH_LONG).show()
-        }
 
         return binding?.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+
+        if(arguments?.getInt("state") == Constants.AUTH_SCREEN_REG_STATE){
+            vm.changeAuthScreenState()
+        }
 
         setupListeners()
         setupObservers()
@@ -70,18 +79,14 @@ class AuthorizationFragment : Fragment() {
     private fun setupListeners() {
         binding?.apply {
 
-            signInUpButton.setOnClickListener {
-                vm.changeAuthScreenState()
-            }
-
-            authButton.setOnClickListener {
-                if(checkPassword()) {
+            buttonRegOrAuthUser.setOnClickListener {
+                if(checkPassword() && checkNickname()) {
                     val user = UserForAuth(
                         nickname = nicknameEditText.text.toString(),
                         email = emailEditText.text.toString(),
                         password = passwordEditText.text.toString()
                     )
-                    if(repeatPasswordEditText.isVisible){
+                    if(repeatPasswordCardView.isVisible){
                         regUser(user)
                     } else {
                         Log.e("callAuth", "Auth is calling")
@@ -102,6 +107,7 @@ class AuthorizationFragment : Fragment() {
                     Toast.makeText(this@AuthorizationFragment.context,
                         "Successfully authorized",
                         Toast.LENGTH_SHORT).show()
+                    navigate(authNavCommandProvider.toMain)
                 } else {
                     binding?.authProgressBar?.visibility = View.GONE
                     Toast.makeText(this@AuthorizationFragment.context,
@@ -139,9 +145,27 @@ class AuthorizationFragment : Fragment() {
         })
     }
 
+    private fun checkNickname(): Boolean{
+        binding?.apply {
+            if(nicknameCardView.isVisible) {
+                return if (nicknameEditText.text.toString().isEmpty()){
+                    Toast.makeText(
+                        this@AuthorizationFragment.context,
+                        resources.getString(R.string.nickname_check_empty_toast_text),
+                        Toast.LENGTH_SHORT
+                    ).show()
+                    false
+                } else{
+                    true
+                }
+            } else return true
+        }
+        return false
+    }
+
     private fun checkPassword(): Boolean {
         binding?.apply {
-            if(repeatPasswordEditText.isVisible) {
+            if(repeatPasswordCardView.isVisible) {
                 return if (passwordEditText.text.toString() == repeatPasswordEditText.text.toString()) {
                     if (passwordEditText.text.toString().length >= 8) {
                         true
@@ -181,22 +205,26 @@ class AuthorizationFragment : Fragment() {
             when (state){
                 AuthScreenState.SIGN_IN -> {
                     binding?.apply {
-                        nicknameEditText.visibility = View.GONE
-                        nicknameLabelTextView.visibility = View.GONE
-                        repeatPasswordEditText.visibility = View.GONE
-                        repeatPasswordLabelTextView.visibility = View.GONE
-                        authButton.text = resources.getString(R.string.auth_button_text)
-                        signInUpButton.text = resources.getString(R.string.sign_up_button_text)
+                        nicknameCardView.visibility = View.GONE
+                        repeatPasswordCardView.visibility = View.GONE
+                        passwordEditText.imeOptions = EditorInfo.IME_ACTION_DONE
+                        buttonRegOrAuthUser.setCardBackgroundColor(ResourcesCompat.getColor(resources,
+                            R.color.black, null))
+                        buttonRegOrAuthUserTextView.setTextColor(ResourcesCompat.getColor(resources,
+                            R.color.yellow_second, null))
+                        buttonRegOrAuthUserTextView.text = getString(R.string.button_next_text)
                     }
                 }
                 AuthScreenState.SIGN_UP -> {
                     binding?.apply {
-                        nicknameEditText.visibility = View.VISIBLE
-                        nicknameLabelTextView.visibility = View.VISIBLE
-                        repeatPasswordEditText.visibility = View.VISIBLE
-                        repeatPasswordLabelTextView.visibility = View.VISIBLE
-                        authButton.text = resources.getString(R.string.registr_button_text)
-                        signInUpButton.text = resources.getString(R.string.sign_in_button_text)
+                        nicknameCardView.visibility = View.VISIBLE
+                        repeatPasswordCardView.visibility = View.VISIBLE
+                        passwordEditText.imeOptions = EditorInfo.IME_ACTION_NEXT
+                        buttonRegOrAuthUser.setCardBackgroundColor(ResourcesCompat.getColor(resources,
+                            R.color.yellow_second, null))
+                        buttonRegOrAuthUserTextView.setTextColor(ResourcesCompat.getColor(resources,
+                            R.color.black, null))
+                        buttonRegOrAuthUserTextView.text = getString(R.string.reg_button_text)
                     }
                 }
             }

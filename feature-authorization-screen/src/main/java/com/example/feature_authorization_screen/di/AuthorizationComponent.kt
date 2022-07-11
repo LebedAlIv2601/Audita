@@ -2,6 +2,7 @@ package com.example.feature_authorization_screen.di
 
 import androidx.lifecycle.ViewModel
 import com.example.feature_authorization_screen.domain.repository.AuthUserRepository
+import com.example.feature_authorization_screen.navigation.AuthNavCommandProvider
 import com.example.feature_authorization_screen.presentation.fragment.AuthorizationFragment
 import com.google.firebase.auth.FirebaseAuth
 import dagger.Component
@@ -29,6 +30,8 @@ interface AuthorizationDeps{
     val auth: FirebaseAuth
 
     val repo: AuthUserRepository
+
+    val authNavCommandProvider: AuthNavCommandProvider
 
 }
 
