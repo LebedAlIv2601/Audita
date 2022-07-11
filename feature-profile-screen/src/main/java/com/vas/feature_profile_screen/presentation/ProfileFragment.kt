@@ -1,4 +1,4 @@
-package com.vas.feature_profile_screen.musician.presentation
+package com.vas.feature_profile_screen.presentation
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment
@@ -7,8 +7,7 @@ import android.view.View
 import android.view.ViewGroup
 import com.vas.feature_profile_screen.R
 
-
-class MusiciansProfileFragment : Fragment() {
+class ProfileFragment : Fragment() {
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
